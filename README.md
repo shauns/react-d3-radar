@@ -10,44 +10,57 @@ React-based Radar chart for D3
 
 D3v4's modular structure means you can pull in things like the scaling or colour logic, and leave out DOM functionality if you're using D3 in an environment that 'owns' the DOM -- such as React.
 
-This is a Radar chart component for displaying multiple sets of data.
+This is a Radar chart component for displaying multiple sets of data. Hovering is supported via `d3-voronoi`.
 
 ## Examples
 
 ```js
 import Radar from 'react-d3-radar';
-<Radar 
+<Radar
+      width={500}
+      height={500}
+      padding={70}
+      domainMax={10}
+      data={{
+        variables: [
+          {key: 'resilience', label: 'Resilience'},
+          {key: 'strength', label: 'Strength'},
+          {key: 'adaptability', label: 'Adaptability'},
+          {key: 'creativity', label: 'Creativity'},
+          {key: 'openness', label: 'Open to Change'},
+          {key: 'confidence', label: 'Confidence'},
+        ],
+        sets: [
+          {
+            key: 'me',
+            label: 'My Scores',
+            values: {
+              resilience: 4,
+              strength: 6,
+              adaptability: 7,
+              creativity: 2,
+              openness: 8,
+              confidence: 1,
+            },
+          },
+          {
+            key: 'everyone',
+            label: 'Everyone',
+            values: {
+              resilience: 10,
+              strength: 8,
+              adaptability: 6,
+              creativity: 4,
+              openness: 2,
+              confidence: 0,
+            },
+          },
+        ],
+      }}
+    />
 ```
 ## API
 
-### &lt;Axis />
+### &lt;Radar />
 
-Renders an Axis in SVG (so it expects to be within an `svg` element).
-
-##### values: Array&lt;T>
-
-The values corresponding to where the ticks on the axis will be made.
-
-##### position: (d: T) => number
-
-A function converting a tick value to an offset along the axis.
-
-##### format: (d: T) => string
-
-A function rendering a tick value to a string, for its label.
-
-##### range: Array&lt;number>
-
-The numerical range of the *rendered* axis. So, if an axis runs 1000px wide, this would be `[0, 1000]`.
-
-##### style: AxisStyle
-
-This is optional -- by default the axis is rendered with 'bottom' alignment (left-to-right, ticks below the line).
-
-### axisPropsFromTickScale(scale, tickCount)
-
-Creates props for an `<Axis />` component from a tick-based D3 scale, such as `scaleLinear`.
-
-### axisPropsFromBandedScale(scale)
-
-Creates props for an `<Axis />` component from a banded D3 scale, such as `scaleBand`.
+Renders a Radar chart in SVG (creates its own `svg` element). Props are as per the example above.
