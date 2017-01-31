@@ -1,0 +1,17 @@
+language: node_js
+sudo: false
+cache:
+  directories:
+  - node_modules
+node_js:
+- 4
+script: npm run lint && npm run flow_check && npm run test:travis
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: shaun.stanworth@googlemail.com
+  api_key:
+    secure: dEFJdfMoxAbb5jgABA9UB+xwM0WH11ubdufvlm2mnnM8ysGtRRy3rVI3LOJNhrIey6FWwoJPLlpAhks0giuIanE6tsHSMAm/EBrULXgMrimTsU6FNtVW/6YhkUAXxe/v+OtLEXj0vifVM4yFwN/+nIRhojmhytxpozPTZibZoojPlCt4Euds/s+j0AowFpG90BqyjiL51mE6LD3qRCI6cxJVzaHfwomEGH41DoCqn2biaSd9mgCPFOlOPZxfe/ttgmmrFOX/H0bkdEUzWKZwf540E9+9Gqnqlp9NOTKQH56LXW8oCm7wMAtVn5zq4oI4UWZSlFjNkaaKdMAwSkZcA0AtaKVReK84aVouTojEmXYeKkcproGQPy4l2+AjgB7nTsddfo3CBveok7G/wZxgi3XfhB+4UcIKwwid0/qWHPKhd5Odo2+N8G9Zfewt5344maBre69zG0IoEMr1Sm1C07yGewDl1DuiwE60VfrH2UyHMnieZsF1BPr7lUcSqAxCVaqh2D0e+koBJmQ/icuyKEJParQj7ggeTl/laKJHQ1O1BVbhtAqGMB3Zwdtd7zv8n+Bpw/4V4ulRHynz8A/gjb/flHrcz1dASPyLfGi0mdBAcmB7szN6Fgh2kjaQG6sjxBYw50M0FxDaeRg/Ad579PKsLzI0GRH5sFddpxjo7d8=
+  on:
+    repo: shauns/react-d3-radar
+    branch: master

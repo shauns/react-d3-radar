@@ -1,0 +1,58 @@
+{
+  "name": "react-d3-radar",
+  "version": "0.1.0",
+  "description": "React-based Radar chart for D3",
+  "main": "lib/react-d3-radar.js",
+  "repository": "https://github.com/shauns/react-d3-radar.git",
+  "author": "shauns",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "rm -rf lib && babel src --out-dir lib --ignore __tests__ && flow-copy-source -i **/__tests__/**/*.js -v src lib",
+    "lint": "eslint --ext .js,.jsx .",
+    "flow_check": "flow check",
+    "test:travis": "jest",
+    "prettier": "prettier --write --bracket-spacing=false --single-quote --trailing-comma src/*.js src/**/*.js"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0"
+  },
+  "dependencies": {
+    "d3-scale": "^1.0.4",
+    "d3-shape": "^1.0.4",
+    "d3-voronoi": "^1.1.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.37.0",
+    "flow-copy-source": "^1.1.0",
+    "jest": "^18.1.0",
+    "prettier": "^0.11.0",
+    "react": "^15.4.2",
+    "react-test-renderer": "^15.4.2"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "react-component",
+    "ui",
+    "d3",
+    "d3-radar",
+    "d3-scale",
+    "d3-shape"
+  ],
+  "jest": {
+    "rootDir": "src"
+  }
+}
