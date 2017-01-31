@@ -13,7 +13,10 @@ type RadarDataSet = {
   values: {[variableKey: string]: number},
 };
 
-export type RadarData = {variables: Array<RadarVariable>, sets: Array<RadarDataSet>};
+export type RadarData = {
+  variables: Array<RadarVariable>,
+  sets: Array<RadarDataSet>,
+};
 
 export type RadarPoint = {
   x: number,
