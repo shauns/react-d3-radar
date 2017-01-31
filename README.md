@@ -1,5 +1,7 @@
 # react-d3-radar
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/shauns/react-d3-radar.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/shauns/react-d3-radar.svg?branch=master)](https://travis-ci.org/shauns/react-d3-radar)
 
 <img src="http://i.imgur.com/rgJ7bXi.png" width="300">
