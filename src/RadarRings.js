@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import _ from 'lodash';
-import type {TickScale} from './utils';
+import type {TickScale} from './types';
 
 type RadarRingsProps = {
   ticks: Array<number>,
