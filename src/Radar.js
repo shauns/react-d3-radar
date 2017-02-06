@@ -61,6 +61,7 @@ type Props = {
   padding: number,
   domainMax: number,
   style?: {},
+  onSelect?: (point: RadarPoint | null) => void,
 };
 
 const defaultRadarStyle = {
@@ -119,12 +120,16 @@ export default class Radar extends Component {
 
   componentWillReceiveProps(nextProps: Props) {
     this.setState({selected: null, ...convertData(nextProps)});
+    const {onSelect} = nextProps;
+    if (onSelect) {
+      onSelect(null);
+    }
   }
 
   componentDidMount() {
     if (this.hoverMap) {
       this.hoverMap.addEventListener('mousemove', (event: MouseEvent) => {
-        const {padding, height, width} = this.props;
+        const {padding, height, width, onSelect} = this.props;
         const {radius} = this.state;
         const innerHeight = height - padding * 2;
         const innerWidth = width - padding * 2;
@@ -140,6 +145,9 @@ export default class Radar extends Component {
         const site = voronoiDiagram.find(clientX, clientY, radius / 2);
         if (!site) {
           this.setState({selected: null});
+          if (onSelect) {
+            onSelect(null);
+          }
           return;
         }
 
@@ -147,6 +155,9 @@ export default class Radar extends Component {
         const {selected: currentSelected} = this.state;
         if (!currentSelected || currentSelected.key !== data.key) {
           this.setState({selected: data});
+          if (onSelect) {
+            onSelect(data);
+          }
         }
       });
     }

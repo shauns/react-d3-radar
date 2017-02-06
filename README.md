@@ -21,6 +21,13 @@ import Radar from 'react-d3-radar';
       height={500}
       padding={70}
       domainMax={10}
+      onSelect={(point) => {
+        if (point) {
+          console.log('hovered over a data point');
+        } else {
+          console.log('not over anything');
+        }
+      }}
       data={{
         variables: [
           {key: 'resilience', label: 'Resilience'},
