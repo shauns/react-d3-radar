@@ -124,11 +124,19 @@ export default class Radar extends Component {
   componentDidMount() {
     if (this.hoverMap) {
       this.hoverMap.addEventListener('mousemove', (event: MouseEvent) => {
-        const {padding} = this.props;
+        const {padding, height, width} = this.props;
+        const {radius} = this.state;
+        const innerHeight = height - padding * 2;
+        const innerWidth = width - padding * 2;
+        const diameter = radius * 2;
+
         let {offsetX: clientX, offsetY: clientY} = event;
         clientX -= padding;
         clientY -= padding;
-        const {voronoiDiagram, radius} = this.state;
+        clientX -= (innerWidth - diameter) / 2;
+        clientY -= (innerHeight - diameter) / 2;
+
+        const {voronoiDiagram} = this.state;
         const site = voronoiDiagram.find(clientX, clientY, radius / 2);
         if (!site) {
           this.setState({selected: null});
@@ -146,7 +154,8 @@ export default class Radar extends Component {
 
   render() {
     const {data, width, height, padding, domainMax, style} = this.props;
-    const {allPoints, scales, offsetAngles, selected} = this.state;
+    const {allPoints, scales, offsetAngles, selected, radius} = this.state;
+    const diameter = radius * 2;
     const {axisColor, ringColor, numRings} = {...defaultRadarStyle, ...style};
 
     const selectedSetKey = selected ? selected.setKey : null;
@@ -176,7 +185,16 @@ export default class Radar extends Component {
             this.hoverMap = c;
           }}
         >
-          <rect width={innerWidth} height={innerHeight} fill={'transparent'} />
+          <rect
+            width={diameter}
+            height={diameter}
+            fill={'transparent'}
+            transform={
+              `translate(${(innerWidth - diameter) / 2}, ${(innerHeight -
+                diameter) /
+                2})`
+            }
+          />
           <g transform={`translate(${innerWidth / 2}, ${innerHeight / 2})`}>
             <RadarRings
               ticks={ticks}

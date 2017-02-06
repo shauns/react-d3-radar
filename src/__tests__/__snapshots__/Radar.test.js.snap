@@ -7,6 +7,7 @@ exports[`test Renders component 1`] = `
     <rect
       fill="transparent"
       height={360}
+      transform="translate(0, 0)"
       width={360} />
     <g
       transform="translate(180, 180)">
