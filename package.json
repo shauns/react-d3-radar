@@ -1,6 +1,6 @@
 {
   "name": "react-d3-radar",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "React-based Radar chart for D3",
   "main": "lib/react-d3-radar.js",
   "repository": "https://github.com/shauns/react-d3-radar.git",

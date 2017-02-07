@@ -43,12 +43,7 @@ export default function EmptyRadar(props: Props) {
 
   return (
     <svg width={width} height={height}>
-      <g
-        transform={`translate(${padding}, ${padding})`}
-        ref={c => {
-          this.hoverMap = c;
-        }}
-      >
+      <g transform={`translate(${padding}, ${padding})`}>
         <rect
           width={diameter}
           height={diameter}
