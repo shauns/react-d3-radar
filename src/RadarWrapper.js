@@ -63,16 +63,13 @@ export default class RadarWrapper extends Component {
   hoverMap = null;
 
   componentDidMount() {
-    const {
-      padding,
-      height,
-      width,
-      onHover,
-      radius,
-      voronoiDiagram,
-    } = this.props;
-    if (this.hoverMap && onHover) {
+    if (this.hoverMap) {
       this.hoverMap.addEventListener('mousemove', (event: MouseEvent) => {
+        const {onHover} = this.props;
+        if (!onHover) {
+          return;
+        }
+        const {padding, height, width, radius, voronoiDiagram} = this.props;
         onHover(
           getHovered(event, height, width, padding, radius, voronoiDiagram),
         );
@@ -156,8 +153,9 @@ export default class RadarWrapper extends Component {
                 />
               );
             })}
-            {highlightedPoint
-              ? <RadarCircle
+            {
+              highlightedPoint
+                ? <RadarCircle
                   key={highlightedPoint.setKey}
                   points={highlightedPoint.points}
                   scales={scales}
@@ -168,7 +166,8 @@ export default class RadarWrapper extends Component {
                     highlighted ? highlighted.variableKey : null
                   }
                 />
-              : null}
+                : null
+            }
           </g>
         </g>
       </svg>
