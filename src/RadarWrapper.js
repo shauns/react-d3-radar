@@ -30,36 +30,52 @@ const defaultRadarStyle = {
   ringColor: '#cdcdcd',
 };
 
+function getHovered(
+  event: MouseEvent,
+  height: number,
+  width: number,
+  padding: number,
+  radius: number,
+  voronoiDiagram: any,
+) {
+  const innerHeight = height - padding * 2;
+  const innerWidth = width - padding * 2;
+  const diameter = radius * 2;
+
+  let {offsetX: clientX, offsetY: clientY} = event;
+  clientX -= padding;
+  clientY -= padding;
+  clientX -= (innerWidth - diameter) / 2;
+  clientY -= (innerHeight - diameter) / 2;
+
+  const site = voronoiDiagram.find(clientX, clientY, radius / 2);
+  if (!site) {
+    return null;
+  }
+
+  const {data} = site;
+  return data;
+}
+
 export default class RadarWrapper extends Component {
   props: Props;
 
   hoverMap = null;
 
   componentDidMount() {
-    const {padding, height, width, onHover, radius} = this.props;
+    const {
+      padding,
+      height,
+      width,
+      onHover,
+      radius,
+      voronoiDiagram,
+    } = this.props;
     if (this.hoverMap && onHover) {
       this.hoverMap.addEventListener('mousemove', (event: MouseEvent) => {
-        const innerHeight = height - padding * 2;
-        const innerWidth = width - padding * 2;
-        const diameter = radius * 2;
-
-        let {offsetX: clientX, offsetY: clientY} = event;
-        clientX -= padding;
-        clientY -= padding;
-        clientX -= (innerWidth - diameter) / 2;
-        clientY -= (innerHeight - diameter) / 2;
-
-        const {voronoiDiagram} = this.props;
-        const site = voronoiDiagram.find(clientX, clientY, radius / 2);
-        if (!site) {
-          onHover(null);
-        }
-
-        const {data} = site;
-        const {highlighted: currentSelected} = this.props;
-        if (!currentSelected || currentSelected.key !== data.key) {
-          onHover(data);
-        }
+        onHover(
+          getHovered(event, height, width, padding, radius, voronoiDiagram),
+        );
       });
     }
   }
@@ -140,9 +156,8 @@ export default class RadarWrapper extends Component {
                 />
               );
             })}
-            {
-              highlightedPoint
-                ? <RadarCircle
+            {highlightedPoint
+              ? <RadarCircle
                   key={highlightedPoint.setKey}
                   points={highlightedPoint.points}
                   scales={scales}
@@ -153,8 +168,7 @@ export default class RadarWrapper extends Component {
                     highlighted ? highlighted.variableKey : null
                   }
                 />
-                : null
-            }
+              : null}
           </g>
         </g>
       </svg>
