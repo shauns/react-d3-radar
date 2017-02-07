@@ -5,7 +5,7 @@ export type TickScale = {
   tickFormat(count: number, fmt: ?string): (val: number) => string,
 };
 
-type RadarVariable = {key: string, label: string};
+export type RadarVariable = {key: string, label: string};
 
 type RadarDataSet = {
   key: string,

@@ -6,6 +6,7 @@ import Radar from '../Radar';
 test('Renders component', () => {
   const component = renderer.create(
     <Radar
+      highlighted={null}
       width={500}
       height={500}
       padding={70}

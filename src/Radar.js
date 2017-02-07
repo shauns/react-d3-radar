@@ -1,13 +1,11 @@
 // @flow
-import React, {Component} from 'react';
+import React from 'react';
 import {scaleLinear, schemeCategory10} from 'd3-scale';
 import {voronoi} from 'd3-voronoi';
 import _ from 'lodash';
 import {flatMapDeepArray, forEachArray} from './utils';
 import type {TickScale, RadarPoint, RadarData} from './types';
-import RadarAxis from './RadarAxis';
-import RadarCircle from './RadarCircle';
-import RadarRings from './RadarRings';
+import RadarWrapper from './RadarWrapper';
 
 function radiusScales(
   data: RadarData,
@@ -61,22 +59,8 @@ type Props = {
   padding: number,
   domainMax: number,
   style?: {},
-  onSelect?: (point: RadarPoint | null) => void,
-};
-
-const defaultRadarStyle = {
-  numRings: 4,
-  axisColor: '#cdcdcd',
-  ringColor: '#cdcdcd',
-};
-
-type State = {
-  selected: ?RadarPoint,
-  scales: {[variableKey: string]: TickScale},
-  offsetAngles: {[variableKey: string]: number},
-  allPoints: Array<{setKey: string, points: Array<RadarPoint>}>,
-  voronoiDiagram: any,
-  radius: number,
+  onHover?: (point: RadarPoint | null) => void,
+  highlighted: ?RadarPoint,
 };
 
 function convertData(props) {
@@ -106,162 +90,55 @@ function convertData(props) {
   return {allPoints, scales, offsetAngles, voronoiDiagram, radius};
 }
 
-export default class Radar extends Component {
-  props: Props;
+export default function Radar(props: Props) {
+  const {
+    data,
+    width,
+    height,
+    padding,
+    domainMax,
+    style,
+    onHover,
+    highlighted,
+  } = props;
+  const {allPoints, scales, offsetAngles, radius, voronoiDiagram} = convertData(
+    props,
+  );
 
-  state: State;
+  const highlightedSetKey = highlighted ? highlighted.setKey : null;
 
-  hoverMap = null;
+  const backgroundScale = scales[data.variables[0].key];
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {selected: null, ...convertData(props)};
-  }
+  const colors = {};
+  forEachArray(allPoints, ({setKey}, idx) => {
+    colors[setKey] = schemeCategory10[idx];
+  });
 
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({selected: null, ...convertData(nextProps)});
-    const {onSelect} = nextProps;
-    if (onSelect) {
-      onSelect(null);
-    }
-  }
+  const [highlightedPoints, regularPoints] = _.partition(
+    allPoints,
+    ({setKey}) => setKey === highlightedSetKey,
+  );
 
-  componentDidMount() {
-    if (this.hoverMap) {
-      this.hoverMap.addEventListener('mousemove', (event: MouseEvent) => {
-        const {padding, height, width, onSelect} = this.props;
-        const {radius} = this.state;
-        const innerHeight = height - padding * 2;
-        const innerWidth = width - padding * 2;
-        const diameter = radius * 2;
-
-        let {offsetX: clientX, offsetY: clientY} = event;
-        clientX -= padding;
-        clientY -= padding;
-        clientX -= (innerWidth - diameter) / 2;
-        clientY -= (innerHeight - diameter) / 2;
-
-        const {voronoiDiagram} = this.state;
-        const site = voronoiDiagram.find(clientX, clientY, radius / 2);
-        if (!site) {
-          this.setState({selected: null});
-          if (onSelect) {
-            onSelect(null);
-          }
-          return;
-        }
-
-        const {data} = site;
-        const {selected: currentSelected} = this.state;
-        if (!currentSelected || currentSelected.key !== data.key) {
-          this.setState({selected: data});
-          if (onSelect) {
-            onSelect(data);
-          }
-        }
-      });
-    }
-  }
-
-  render() {
-    const {data, width, height, padding, domainMax, style} = this.props;
-    const {allPoints, scales, offsetAngles, selected, radius} = this.state;
-    const diameter = radius * 2;
-    const {axisColor, ringColor, numRings} = {...defaultRadarStyle, ...style};
-
-    const selectedSetKey = selected ? selected.setKey : null;
-
-    const innerHeight = height - padding * 2;
-    const innerWidth = width - padding * 2;
-
-    const backgroundScale = scales[data.variables[0].key];
-    const ticks = backgroundScale.ticks(numRings).slice(1);
-    const tickFormat = backgroundScale.tickFormat(numRings);
-
-    const colors = {};
-    forEachArray(allPoints, ({setKey}, idx) => {
-      colors[setKey] = schemeCategory10[idx];
-    });
-
-    const [selectedPoints, unSelectedPoints] = _.partition(
-      allPoints,
-      ({setKey}) => setKey === selectedSetKey,
-    );
-
-    return (
-      <svg width={width} height={height}>
-        <g
-          transform={`translate(${padding}, ${padding})`}
-          ref={c => {
-            this.hoverMap = c;
-          }}
-        >
-          <rect
-            width={diameter}
-            height={diameter}
-            fill={'transparent'}
-            transform={
-              `translate(${(innerWidth - diameter) / 2}, ${(innerHeight -
-                diameter) /
-                2})`
-            }
-          />
-          <g transform={`translate(${innerWidth / 2}, ${innerHeight / 2})`}>
-            <RadarRings
-              ticks={ticks}
-              scale={backgroundScale}
-              color={ringColor}
-              format={tickFormat}
-            />
-            {data.variables.map(({key, label}) => {
-              return (
-                <RadarAxis
-                  key={key}
-                  scale={scales[key]}
-                  offsetAngle={offsetAngles[key]}
-                  label={label}
-                  domainMax={domainMax}
-                  color={axisColor}
-                />
-              );
-            })}
-            {unSelectedPoints.map(({setKey, points}) => {
-              const isSelected = setKey === selectedSetKey;
-              const selectedVariableKey = isSelected && selected
-                ? selected.variableKey
-                : null;
-              return (
-                <RadarCircle
-                  key={setKey}
-                  points={points}
-                  scales={scales}
-                  offsetAngles={offsetAngles}
-                  color={colors[setKey]}
-                  isSelected={isSelected}
-                  selectedVariableKey={selectedVariableKey}
-                />
-              );
-            })}
-            {selectedPoints.map(({setKey, points}) => {
-              const isSelected = setKey === selectedSetKey;
-              const selectedVariableKey = isSelected && selected
-                ? selected.variableKey
-                : null;
-              return (
-                <RadarCircle
-                  key={setKey}
-                  points={points}
-                  scales={scales}
-                  offsetAngles={offsetAngles}
-                  color={colors[setKey]}
-                  isSelected={isSelected}
-                  selectedVariableKey={selectedVariableKey}
-                />
-              );
-            })}
-          </g>
-        </g>
-      </svg>
-    );
-  }
+  return (
+    <RadarWrapper
+      variables={data.variables}
+      width={width}
+      height={height}
+      padding={padding}
+      domainMax={domainMax}
+      style={style}
+      onHover={onHover}
+      highlighted={highlighted}
+      scales={scales}
+      backgroundScale={backgroundScale}
+      offsetAngles={offsetAngles}
+      voronoiDiagram={voronoiDiagram}
+      radius={radius}
+      highlightedPoint={
+        highlightedPoints.length > 0 ? highlightedPoints[0] : null
+      }
+      regularPoints={regularPoints}
+      colors={colors}
+    />
+  );
 }
