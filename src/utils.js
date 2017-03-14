@@ -34,6 +34,8 @@ export function radarPoints(
   scales: {[variableKey: string]: TickScale},
   offsetAngles: {[variableKey: string]: number},
 ): Array<{setKey: string, points: Array<RadarPoint>}> {
+  const allVariableKeys = data.variables.map(variable => variable.key);
+
   return data.sets.map(({key, values}) => {
     const points = [];
     _.forEach(values, (value, variableKey) => {
@@ -57,6 +59,11 @@ export function radarPoints(
       points.push(point);
     });
 
-    return {setKey: key, points};
+    const sortedPoints = _.sortBy(points, point => {
+      const pointVariableKey = point.variableKey;
+      return _.indexOf(allVariableKeys, pointVariableKey);
+    });
+
+    return {setKey: key, points: sortedPoints};
   });
 }
