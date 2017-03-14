@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import _ from 'lodash';
 import {radialLine, curveCardinalClosed} from 'd3-shape';
 import type {TickScale, RadarPoint} from './types';
 
@@ -47,7 +48,7 @@ export default function RadarCircle(props: RadarCircleProps) {
 
   const lineFunction = radialLine()
     .radius((point: RadarPoint) => scales[point.variableKey](point.value))
-    .angle((point: RadarPoint) => offsetAngles[point.variableKey])
+    .angle((point: RadarPoint) => _.round(offsetAngles[point.variableKey], 6))
     .curve(curveCardinalClosed);
 
   const pathData = lineFunction(points);
