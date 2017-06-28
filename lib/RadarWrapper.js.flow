@@ -140,19 +140,23 @@ export default class RadarWrapper extends Component {
                 />
               );
             })}
-            {regularPoints.map(({setKey, points}) => {
-              return (
-                <RadarCircle
-                  key={setKey}
-                  points={points}
-                  scales={scales}
-                  offsetAngles={offsetAngles}
-                  color={colors[setKey]}
-                  isSelected={false}
-                  selectedVariableKey={null}
-                />
-              );
-            })}
+            <g className="data">
+              {
+                regularPoints.map(({setKey, points}) => {
+                  return (
+                    <RadarCircle
+                      key={setKey}
+                      points={points}
+                      scales={scales}
+                      offsetAngles={offsetAngles}
+                      color={colors[setKey]}
+                      isSelected={false}
+                      selectedVariableKey={null}
+                    />
+                  );
+                })
+              }
+            </g>
             {
               highlightedPoint
                 ? <RadarCircle
