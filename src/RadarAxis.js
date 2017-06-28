@@ -13,7 +13,7 @@ type RadarAxisProps = {
 
 const defaultRadarAxisStyle = {
   axisOverreach: 1.1,
-  labelOverreach: 1.2,
+  labelOverreach: 1.42,
   fontSize: 10,
   fontFamily: 'sans-serif',
   textFill: 'black',
@@ -42,17 +42,16 @@ export default function RadarAxis(props: RadarAxisProps) {
         stroke={color}
         strokeWidth={axisWidth}
       />
-      <text
-        x={scale(domainMax * labelOverreach) * xFactor}
-        y={scale(domainMax * labelOverreach) * yFactor}
-        fontSize={fontSize}
-        fontFamily={fontFamily}
-        fill={textFill}
-        textAnchor={'middle'}
+      <foreignObject
+        x={scale(((domainMax * labelOverreach) * xFactor) - 26)}
+        y={scale(((domainMax * labelOverreach) * (yFactor * 0.87)) - 7)}
         dy={'0.35em'}
+        dx={'0.35em'}
       >
-        {label}
-      </text>
+        <div>
+          <p>{label}</p>
+        </div>
+      </foreignObject>
     </g>
   );
 }
