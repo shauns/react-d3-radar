@@ -3,6 +3,7 @@ import React from 'react';
 import {schemeCategory10} from 'd3-scale';
 import {voronoi} from 'd3-voronoi';
 import _ from 'lodash';
+import invariant from 'invariant';
 import {
   flatMapDeepArray,
   forEachArray,
@@ -61,6 +62,9 @@ export default function Radar(props: Props) {
     onHover,
     highlighted,
   } = props;
+
+  invariant(data, 'The `data` property should be non-null.');
+
   const {allPoints, scales, offsetAngles, radius, voronoiDiagram} = convertData(
     props,
   );
