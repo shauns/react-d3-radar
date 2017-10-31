@@ -11,7 +11,6 @@ type Props = {
   height: number,
   padding: number,
   domainMax: number,
-  domainMin: number,
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
@@ -90,7 +89,6 @@ export default class RadarWrapper extends Component {
       variables,
       offsetAngles,
       domainMax,
-      domainMin,
       highlightedPoint,
       regularPoints,
       backgroundScale,
@@ -138,7 +136,6 @@ export default class RadarWrapper extends Component {
                   offsetAngle={offsetAngles[key]}
                   label={label}
                   domainMax={domainMax}
-                  domainMin={domainMin}
                   color={axisColor}
                 />
               );

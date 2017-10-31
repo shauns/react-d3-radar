@@ -18,7 +18,7 @@ type Props = {
   height: number,
   padding: number,
   domainMax: number,
-  domainMin: number,
+  domainMin?: number,
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
@@ -30,7 +30,7 @@ function convertData(props) {
   const innerWidth = width - padding * 2;
 
   const radius = Math.min(innerWidth / 2, innerHeight / 2);
-  const scales = radiusScales(data.variables, domainMax, domainMin, radius);
+  const scales = radiusScales(data.variables, domainMax, domainMin || 0, radius);
 
   const angleSliceRadians = Math.PI * 2 / data.variables.length;
   const offsetAngles = {};
