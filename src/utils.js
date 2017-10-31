@@ -19,11 +19,12 @@ export function forEachArray<T>(
 export function radiusScales(
   variables: Array<RadarVariable>,
   domainMax: number,
+  domainMin: number,
   radius: number,
 ): {[variableKey: string]: TickScale} {
   const res = {};
   _.forEach(variables, ({key}) => {
-    const scale = scaleLinear().domain([0, domainMax]).range([0, radius]);
+    const scale = scaleLinear().domain([domainMin, domainMax]).range([0, radius]);
     res[key] = scale;
   });
   return res;
