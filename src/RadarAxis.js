@@ -32,6 +32,7 @@ export default function RadarAxis(props: RadarAxisProps) {
   } = {...defaultRadarAxisStyle, style};
   const xFactor = Math.cos(offsetAngle - Math.PI / 2);
   const yFactor = Math.sin(offsetAngle - Math.PI / 2);
+
   return (
     <g>
       <line
