@@ -72,6 +72,9 @@ export default function Radar(props: Props) {
   const colors = {};
   forEachArray(allPoints, ({setKey}, idx) => {
     colors[setKey] = schemeCategory10[idx];
+    if ((props.colors != undefined) && (props.colors[setKey] != undefined)) {
+      colors[setKey]=props.colors[setKey]
+    }
   });
 
   const [highlightedPoints, regularPoints] = _.partition(
