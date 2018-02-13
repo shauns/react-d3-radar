@@ -74,7 +74,7 @@ export default function Radar(props: Props) {
   forEachArray(allPoints, ({setKey}, idx) => {
     colors[setKey] = schemeCategory10[idx];
     if ((props.colors !== undefined) && (props.colors[setKey] !== undefined)) {
-      colors[setKey]=props.colors[setKey];
+      colors[setKey] = props.colors[setKey];
     }
   });
 
