@@ -19,13 +19,13 @@ type Props = {
   padding: number,
   domainMax: number,
   style?: {},
-  colors?: {},
+  colors?: {[setKey: string]: string},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
 };
 
 function convertData(props) {
-  const {data, width, height, padding, domainMax} = props;
+  const {data, width, height, padding, domainMax, colors} = props;
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
 
@@ -63,7 +63,7 @@ export default function Radar(props: Props) {
     onHover,
     highlighted,
   } = props;
-  const {allPoints, scales, offsetAngles, radius, voronoiDiagram} = convertData(
+  const {allPoints, scales, offsetAngles, radius, voronoiDiagram, colors} = convertData(
     props,
   );
 
