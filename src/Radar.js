@@ -25,7 +25,7 @@ type Props = {
 };
 
 function convertData(props) {
-  const {data, width, height, padding, domainMax, colors} = props;
+  const {data, width, height, padding, domainMax} = props;
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
 
@@ -63,7 +63,7 @@ export default function Radar(props: Props) {
     onHover,
     highlighted,
   } = props;
-  const {allPoints, scales, offsetAngles, radius, voronoiDiagram, colors} = convertData(
+  const {allPoints, scales, offsetAngles, radius, voronoiDiagram} = convertData(
     props,
   );
 
