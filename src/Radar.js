@@ -19,6 +19,7 @@ type Props = {
   padding: number,
   domainMax: number,
   style?: {},
+  colors?: {[setKey: string]: string},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
 };
@@ -58,6 +59,7 @@ export default function Radar(props: Props) {
     padding,
     domainMax,
     style,
+    colors,
     onHover,
     highlighted,
   } = props;
@@ -69,9 +71,10 @@ export default function Radar(props: Props) {
 
   const backgroundScale = scales[data.variables[0].key];
 
-  const colors = {};
   forEachArray(allPoints, ({setKey}, idx) => {
-    colors[setKey] = schemeCategory10[idx];
+    if (colors[setKey] === undefined) {
+      colors[setKey] = schemeCategory10[idx];
+    }
   });
 
   const [highlightedPoints, regularPoints] = _.partition(
