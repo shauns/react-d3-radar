@@ -12,6 +12,7 @@ type Props = {
   variables: Array<RadarVariable>,
   domainMax: number,
   style?: {},
+  colors?: {},
 };
 
 const defaultRadarStyle = {
@@ -21,7 +22,7 @@ const defaultRadarStyle = {
 };
 
 export default function EmptyRadar(props: Props) {
-  const {width, height, padding, variables, domainMax, style} = props;
+  const {width, height, padding, variables, domainMax, style,colors} = props;
   const {axisColor, ringColor, numRings} = {...defaultRadarStyle, ...style};
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
