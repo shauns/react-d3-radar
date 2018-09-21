@@ -7,11 +7,21 @@ node_js:
   - 10
 script: npm run lint && npm run flow_check && npm run test:travis
 deploy:
-  skip_cleanup: true
-  provider: npm
-  email: shaun.stanworth@googlemail.com
-  api_key:
-    secure: H23xLY78wU7nTCQXkptlpi8I+1t5KWaILdFAd8xX5coEcK1xH8TczNyT892PItL8WhNu2fjZsEFgF8ADrqaw7J9H5vNNCRGe/OKpRxyNp36QLO4oYqp1+qg0hIPNKmyrqkY+qsDAPw11PqRrzGR8RorI8dyhIj+F9Bb4d/9vDVJOwgoSFXHWjGtEJj9xnbTNYvHBa0RyZMEXYTPgfPlhIybJFdUz6YBODAYi7ntZ1ru8ocPwqCXZ+MntlPsgKMKxJeZD4rYIFY3VkgPz2/Ae8xg27rrwNrALnaGD892Iwsr4gIXRwDpmzQ+v5rfaSAIVFfh9CKwS6OjJ/wgRR9OyioVDDjwPTlmfqbKrrKDLz6IG4hh5Z3TCN2c+1PIqwdJ8jQlJl9BfYvZF0dpbfQh6o4M2G5rxzGZrmVSVsUN9RLxccvemkH6jWLswHEKDKl2oUTZb/bGdujFgf/3b4yF9pugP4C83aQhVmV9QBBpEh41l56Yy+NrYNmeJt956qpnNDLX/nQRl6+JWwCVPNBmRvGHsEd8Rz1pitw/vhPe7hDRXnspPYCrifWhXVQ3QlJEWZUFbpZcpqoQQY1VfvK0Qz1+mDb7OXN3cXruyIMkuQYHdUbwSLxSAeD4clc/o8GVfmTKJ6CZ36qqCvWkKeU4E5qcFxErwxIrFzfNXpGyoehM=
-  on:
-    tags: true
-    repo: shauns/react-d3-radar
+  - provider: npm
+    skip_cleanup: true
+    provider: npm
+    email: shaun.stanworth@googlemail.com
+    api_key:
+      secure: H23xLY78wU7nTCQXkptlpi8I+1t5KWaILdFAd8xX5coEcK1xH8TczNyT892PItL8WhNu2fjZsEFgF8ADrqaw7J9H5vNNCRGe/OKpRxyNp36QLO4oYqp1+qg0hIPNKmyrqkY+qsDAPw11PqRrzGR8RorI8dyhIj+F9Bb4d/9vDVJOwgoSFXHWjGtEJj9xnbTNYvHBa0RyZMEXYTPgfPlhIybJFdUz6YBODAYi7ntZ1ru8ocPwqCXZ+MntlPsgKMKxJeZD4rYIFY3VkgPz2/Ae8xg27rrwNrALnaGD892Iwsr4gIXRwDpmzQ+v5rfaSAIVFfh9CKwS6OjJ/wgRR9OyioVDDjwPTlmfqbKrrKDLz6IG4hh5Z3TCN2c+1PIqwdJ8jQlJl9BfYvZF0dpbfQh6o4M2G5rxzGZrmVSVsUN9RLxccvemkH6jWLswHEKDKl2oUTZb/bGdujFgf/3b4yF9pugP4C83aQhVmV9QBBpEh41l56Yy+NrYNmeJt956qpnNDLX/nQRl6+JWwCVPNBmRvGHsEd8Rz1pitw/vhPe7hDRXnspPYCrifWhXVQ3QlJEWZUFbpZcpqoQQY1VfvK0Qz1+mDb7OXN3cXruyIMkuQYHdUbwSLxSAeD4clc/o8GVfmTKJ6CZ36qqCvWkKeU4E5qcFxErwxIrFzfNXpGyoehM=
+    on:
+      tags: true
+      repo: shauns/react-d3-radar
+  - provider: npm
+    skip_cleanup: true
+    provider: npm
+    email: shaun.stanworth@googlemail.com
+    api_key:
+      secure: H23xLY78wU7nTCQXkptlpi8I+1t5KWaILdFAd8xX5coEcK1xH8TczNyT892PItL8WhNu2fjZsEFgF8ADrqaw7J9H5vNNCRGe/OKpRxyNp36QLO4oYqp1+qg0hIPNKmyrqkY+qsDAPw11PqRrzGR8RorI8dyhIj+F9Bb4d/9vDVJOwgoSFXHWjGtEJj9xnbTNYvHBa0RyZMEXYTPgfPlhIybJFdUz6YBODAYi7ntZ1ru8ocPwqCXZ+MntlPsgKMKxJeZD4rYIFY3VkgPz2/Ae8xg27rrwNrALnaGD892Iwsr4gIXRwDpmzQ+v5rfaSAIVFfh9CKwS6OjJ/wgRR9OyioVDDjwPTlmfqbKrrKDLz6IG4hh5Z3TCN2c+1PIqwdJ8jQlJl9BfYvZF0dpbfQh6o4M2G5rxzGZrmVSVsUN9RLxccvemkH6jWLswHEKDKl2oUTZb/bGdujFgf/3b4yF9pugP4C83aQhVmV9QBBpEh41l56Yy+NrYNmeJt956qpnNDLX/nQRl6+JWwCVPNBmRvGHsEd8Rz1pitw/vhPe7hDRXnspPYCrifWhXVQ3QlJEWZUFbpZcpqoQQY1VfvK0Qz1+mDb7OXN3cXruyIMkuQYHdUbwSLxSAeD4clc/o8GVfmTKJ6CZ36qqCvWkKeU4E5qcFxErwxIrFzfNXpGyoehM=
+    on:
+      branch: v-next
+      repo: shauns/react-d3-radar
