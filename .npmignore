@@ -3,3 +3,5 @@
 /src/
 
 /flow-typed/
+
+yarn.lock
