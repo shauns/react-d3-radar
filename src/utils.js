@@ -1,5 +1,8 @@
 // @flow
-import _ from "lodash";
+import flatMapDeep from "lodash/flatMapDeep";
+import forEach from "lodash/forEach";
+import sortBy from "lodash/sortBy";
+import indexOf from "lodash/indexOf";
 import { scaleLinear } from "d3-scale";
 import type { TickScale, RadarPoint, RadarData, RadarVariable } from "./types";
 
@@ -7,13 +10,13 @@ export function flatMapDeepArray<T, R>(
   collection: Array<T>,
   fn: (d: T) => Array<R>
 ): Array<R> {
-  return _.flatMapDeep(collection, fn);
+  return flatMapDeep(collection, fn);
 }
 export function forEachArray<T>(
   collection: Array<T>,
   fn: (item: T, idx: number) => void
 ): void {
-  _.forEach(collection, fn);
+  forEach(collection, fn);
 }
 
 export function radiusScales(
@@ -22,7 +25,7 @@ export function radiusScales(
   radius: number
 ): { [variableKey: string]: TickScale } {
   const res = {};
-  _.forEach(variables, ({ key }) => {
+  forEach(variables, ({ key }) => {
     const scale = scaleLinear()
       .domain([0, domainMax])
       .range([0, radius]);
@@ -40,7 +43,7 @@ export function radarPoints(
 
   return data.sets.map(({ key, values, ...rest }) => {
     const points = [];
-    _.forEach(values, (value, variableKey) => {
+    forEach(values, (value, variableKey) => {
       const scale = scales[variableKey];
       const offsetAngle = offsetAngles[variableKey];
       if (scale === undefined || offsetAngle === undefined) {
@@ -61,9 +64,9 @@ export function radarPoints(
       points.push(point);
     });
 
-    const sortedPoints = _.sortBy(points, point => {
+    const sortedPoints = sortBy(points, point => {
       const pointVariableKey = point.variableKey;
-      return _.indexOf(allVariableKeys, pointVariableKey);
+      return indexOf(allVariableKeys, pointVariableKey);
     });
 
     return { setKey: key, points: sortedPoints, ...rest };

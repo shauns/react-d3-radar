@@ -2,7 +2,7 @@
 import React from "react";
 import { schemeCategory10 } from "d3-scale-chromatic";
 import { voronoi } from "d3-voronoi";
-import _ from "lodash";
+import partition from "lodash/partition";
 import {
   flatMapDeepArray,
   forEachArray,
@@ -87,7 +87,7 @@ export default function Radar(props: Props) {
     }
   });
 
-  const [highlightedPoints, regularPoints] = _.partition(
+  const [highlightedPoints, regularPoints] = partition(
     allPoints,
     ({ setKey }) => setKey === highlightedSetKey
   );

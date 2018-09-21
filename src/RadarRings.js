@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import _ from "lodash";
+import reverse from "lodash/reverse";
 import type { TickScale } from "./types";
 
 type RadarRingsProps = {
@@ -24,7 +24,7 @@ export default function RadarRings(props: RadarRingsProps) {
     ...defaultRadarRingsStyle,
     ...style
   };
-  const outerFirst = _.reverse(ticks);
+  const outerFirst = reverse(ticks);
   return (
     <g>
       {outerFirst.map(tickValue => {
