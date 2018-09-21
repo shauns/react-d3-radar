@@ -1,17 +1,17 @@
 // @flow
-import React from 'react';
-import _ from 'lodash';
-import {radialLine, curveCardinalClosed} from 'd3-shape';
-import type {TickScale, RadarPoint} from './types';
+import React from "react";
+import _ from "lodash";
+import { radialLine, curveCardinalClosed } from "d3-shape";
+import type { TickScale, RadarPoint } from "./types";
 
 type RadarCircleProps = {
   points: Array<RadarPoint>,
-  scales: {[variableKey: string]: TickScale},
-  offsetAngles: {[variableKey: string]: number},
+  scales: { [variableKey: string]: TickScale },
+  offsetAngles: { [variableKey: string]: number },
   isSelected: boolean,
   selectedVariableKey: ?string,
   color: string,
-  style?: {},
+  style?: {}
 };
 
 const defaultCircleStyle = {
@@ -20,9 +20,9 @@ const defaultCircleStyle = {
   selectedStrokeOpacity: 1.0,
   inactiveStrokeOpacity: 0.7,
   pointRadius: 3,
-  selectedPointFill: 'white',
+  selectedPointFill: "white",
   selectedPointOpacity: 1.0,
-  inactivePointOpacity: 0.7,
+  inactivePointOpacity: 0.7
 };
 
 export default function RadarCircle(props: RadarCircleProps) {
@@ -33,7 +33,7 @@ export default function RadarCircle(props: RadarCircleProps) {
     isSelected,
     color,
     selectedVariableKey,
-    style,
+    style
   } = props;
   const {
     selectedFillOpacity,
@@ -43,8 +43,8 @@ export default function RadarCircle(props: RadarCircleProps) {
     pointRadius,
     selectedPointFill,
     selectedPointOpacity,
-    inactivePointOpacity,
-  } = {...defaultCircleStyle, ...style};
+    inactivePointOpacity
+  } = { ...defaultCircleStyle, ...style };
 
   const lineFunction = radialLine()
     .radius((point: RadarPoint) => scales[point.variableKey](point.value))

@@ -1,9 +1,9 @@
 // @flow
-import React, {Component} from 'react';
-import type {TickScale, RadarPoint, RadarVariable} from './types';
-import RadarAxis from './RadarAxis';
-import RadarCircle from './RadarCircle';
-import RadarRings from './RadarRings';
+import React, { Component } from "react";
+import type { TickScale, RadarPoint, RadarVariable } from "./types";
+import RadarAxis from "./RadarAxis";
+import RadarCircle from "./RadarCircle";
+import RadarRings from "./RadarRings";
 
 type Props = {
   variables: Array<RadarVariable>,
@@ -14,20 +14,20 @@ type Props = {
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
-  scales: {[variableKey: string]: TickScale},
+  scales: { [variableKey: string]: TickScale },
   backgroundScale: TickScale,
-  offsetAngles: {[variableKey: string]: number},
+  offsetAngles: { [variableKey: string]: number },
   voronoiDiagram: any,
   radius: number,
-  highlightedPoint: ?{setKey: string, points: Array<RadarPoint>},
-  regularPoints: Array<{setKey: string, points: Array<RadarPoint>}>,
-  colors: {[setKey: string]: string},
+  highlightedPoint: ?{ setKey: string, points: Array<RadarPoint> },
+  regularPoints: Array<{ setKey: string, points: Array<RadarPoint> }>,
+  colors: { [setKey: string]: string }
 };
 
 const defaultRadarStyle = {
   numRings: 4,
-  axisColor: '#cdcdcd',
-  ringColor: '#cdcdcd',
+  axisColor: "#cdcdcd",
+  ringColor: "#cdcdcd"
 };
 
 function getHovered(
@@ -36,13 +36,13 @@ function getHovered(
   width: number,
   padding: number,
   radius: number,
-  voronoiDiagram: any,
+  voronoiDiagram: any
 ) {
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
   const diameter = radius * 2;
 
-  let {offsetX: clientX, offsetY: clientY} = event;
+  let { offsetX: clientX, offsetY: clientY } = event;
   clientX -= padding;
   clientY -= padding;
   clientX -= (innerWidth - diameter) / 2;
@@ -53,29 +53,27 @@ function getHovered(
     return null;
   }
 
-  const {data} = site;
+  const { data } = site;
   return data;
 }
 
-export default class RadarWrapper extends Component {
-  props: Props;
-
-  hoverMap = null;
-
+export default class RadarWrapper extends Component<Props> {
   componentDidMount() {
     if (this.hoverMap) {
-      this.hoverMap.addEventListener('mousemove', (event: MouseEvent) => {
-        const {onHover} = this.props;
+      this.hoverMap.addEventListener("mousemove", (event: MouseEvent) => {
+        const { onHover } = this.props;
         if (!onHover) {
           return;
         }
-        const {padding, height, width, radius, voronoiDiagram} = this.props;
+        const { padding, height, width, radius, voronoiDiagram } = this.props;
         onHover(
-          getHovered(event, height, width, padding, radius, voronoiDiagram),
+          getHovered(event, height, width, padding, radius, voronoiDiagram)
         );
       });
     }
   }
+
+  hoverMap = null;
 
   render() {
     const {
@@ -92,10 +90,13 @@ export default class RadarWrapper extends Component {
       highlightedPoint,
       regularPoints,
       backgroundScale,
-      colors,
+      colors
     } = this.props;
     const diameter = radius * 2;
-    const {axisColor, ringColor, numRings} = {...defaultRadarStyle, ...style};
+    const { axisColor, ringColor, numRings } = {
+      ...defaultRadarStyle,
+      ...style
+    };
 
     const innerHeight = height - padding * 2;
     const innerWidth = width - padding * 2;
@@ -114,12 +115,9 @@ export default class RadarWrapper extends Component {
           <rect
             width={diameter}
             height={diameter}
-            fill={'transparent'}
-            transform={
-              `translate(${(innerWidth - diameter) / 2}, ${(innerHeight -
-                diameter) /
-                2})`
-            }
+            fill={"transparent"}
+            transform={`translate(${(innerWidth - diameter) /
+              2}, ${(innerHeight - diameter) / 2})`}
           />
           <g transform={`translate(${innerWidth / 2}, ${innerHeight / 2})`}>
             <RadarRings
@@ -128,7 +126,7 @@ export default class RadarWrapper extends Component {
               color={ringColor}
               format={tickFormat}
             />
-            {variables.map(({key, label}) => {
+            {variables.map(({ key, label }) => {
               return (
                 <RadarAxis
                   key={key}
@@ -140,7 +138,7 @@ export default class RadarWrapper extends Component {
                 />
               );
             })}
-            {regularPoints.map(({setKey, points}) => {
+            {regularPoints.map(({ setKey, points }) => {
               return (
                 <RadarCircle
                   key={setKey}
@@ -153,21 +151,19 @@ export default class RadarWrapper extends Component {
                 />
               );
             })}
-            {
-              highlightedPoint
-                ? <RadarCircle
-                  key={highlightedPoint.setKey}
-                  points={highlightedPoint.points}
-                  scales={scales}
-                  offsetAngles={offsetAngles}
-                  color={colors[highlightedPoint.setKey]}
-                  isSelected={true}
-                  selectedVariableKey={
-                    highlighted ? highlighted.variableKey : null
-                  }
-                />
-                : null
-            }
+            {highlightedPoint ? (
+              <RadarCircle
+                key={highlightedPoint.setKey}
+                points={highlightedPoint.points}
+                scales={scales}
+                offsetAngles={offsetAngles}
+                color={colors[highlightedPoint.setKey]}
+                isSelected
+                selectedVariableKey={
+                  highlighted ? highlighted.variableKey : null
+                }
+              />
+            ) : null}
           </g>
         </g>
       </svg>

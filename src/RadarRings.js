@@ -1,28 +1,28 @@
 // @flow
-import React from 'react';
-import _ from 'lodash';
-import type {TickScale} from './types';
+import React from "react";
+import _ from "lodash";
+import type { TickScale } from "./types";
 
 type RadarRingsProps = {
   ticks: Array<number>,
   scale: TickScale,
   color: string,
   format(number): string,
-  style?: {},
+  style?: {}
 };
 
 const defaultRadarRingsStyle = {
-  fontFamily: 'sans-serif',
+  fontFamily: "sans-serif",
   fontSize: 10,
   ringOpacity: 0.1,
-  textFill: 'black',
+  textFill: "black"
 };
 
 export default function RadarRings(props: RadarRingsProps) {
-  const {ticks, scale, color, format, style} = props;
-  const {fontFamily, fontSize, ringOpacity, textFill} = {
+  const { ticks, scale, color, format, style } = props;
+  const { fontFamily, fontSize, ringOpacity, textFill } = {
     ...defaultRadarRingsStyle,
-    ...style,
+    ...style
   };
   const outerFirst = _.reverse(ticks);
   return (
@@ -44,11 +44,11 @@ export default function RadarRings(props: RadarRingsProps) {
             key={`${tickValue}-tick`}
             x={0}
             y={-scale(tickValue)}
-            dx={'0.4em'}
-            dy={'0.4em'}
+            dx={"0.4em"}
+            dy={"0.4em"}
             fontFamily={fontFamily}
             fontSize={fontSize}
-            textAnchor={'left'}
+            textAnchor={"left"}
             fill={textFill}
           >
             {format(tickValue)}

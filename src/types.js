@@ -2,20 +2,20 @@
 export type TickScale = {
   (d: number): number,
   ticks(count: number): Array<number>,
-  tickFormat(count: number, fmt: ?string): (val: number) => string,
+  tickFormat(count: number, fmt: ?string): (val: number) => string
 };
 
-export type RadarVariable = {key: string, label: string};
+export type RadarVariable = { key: string, label: string };
 
 type RadarDataSet = {
   key: string,
   label: string,
-  values: {[variableKey: string]: number},
+  values: { [variableKey: string]: number }
 };
 
 export type RadarData = {
   variables: Array<RadarVariable>,
-  sets: Array<RadarDataSet>,
+  sets: Array<RadarDataSet>
 };
 
 export type RadarPoint = {
@@ -24,5 +24,5 @@ export type RadarPoint = {
   value: number,
   setKey: string,
   variableKey: string,
-  key: string,
+  key: string
 };

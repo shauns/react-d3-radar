@@ -1,71 +1,65 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
+  "plugins": ["prettier", "flowtype", "react", "import"],
+  "settings": {
+    "import/parser": "babel-eslint",
+    "react": {
+      "version": "15.5"
+    }
   },
   "rules": {
-    "eqeqeq": [2, "allow-null"],
-    "id-length": 0,
-    "no-console": 0, // use it for warnings
-    "no-nested-ternary": 0,
-    "prefer-const": 0,
-    "no-multiple-empty-lines": 0,
-    "no-useless-escape": 0,
-
-    "react/no-did-mount-set-state": 2,
-    "react/no-multi-comp": 0,
-    "react/jsx-boolean-value": [2, "always"],
-    "react/sort-comp": [
-      2, {
-        "order": [
-          "displayName",
-          "propTypes",
-          "contextTypes",
-          "childContextTypes",
-          "mixins",
-          "statics",
-          "defaultProps",
-          "getDefaultProps",
-          "getInitialState",
-          "getChildContext",
-          "componentWillMount",
-          "componentDidMount",
-          "componentWillReceiveProps",
-          "shouldComponentUpdate",
-          "componentWillUpdate",
-          "componentDidUpdate",
-          "componentWillUnmount",
-          "/^on.+$/",
-          "/^get.+$/",
-          "/^render.+$/",
-          "/^.+$/", // All other methods go here
-          "render"
+    "strict": 0,
+    "quotes": 0,
+    "camelcase": 0,
+    "eqeqeq": 2,
+    "no-unused-vars": 2,
+    "prettier/prettier": "error",
+    "no-console": 0,
+    "react/prop-types": 0,
+    "react/jsx-uses-vars": 2,
+    "new-cap": [
+      2,
+      {
+        "capIsNewExceptions": [
+          "Map",
+          "List",
+          "Set",
+          "JumpToAction",
+          "TabsReducer",
+          "StackReducer",
+          "RadarVariable",
+          "RadarSet",
+          "RadarData",
+          "Record"
         ]
       }
     ],
-
-    "max-len": 0,
-    "no-mixed-operators": 0,
-    "no-continue": 0,
-    "no-restricted-syntax": 0,
-    "no-plusplus": 0,
-    "no-confusing-arrow": 0,
-    "arrow-parens": 0,
-    "arrow-body-style": 0,
-    "react/jsx-indent": 0,
-    "react/jsx-indent-props": 0,
-    "react/jsx-closing-bracket-location": 0,
-    "react/prefer-es6-class": 0,
-    "react/jsx-filename-extension": 0,
-    "react/prefer-stateless-function": 0,
-    "object-curly-spacing": 0,
-    "import/imports-first": 0,
-    "import/no-unresolved": 0,
-    "import/no-extraneous-dependencies": 0,
-    "react/no-array-index-key": 0,
-    "react/require-default-props": 0
+    "react/jsx-uses-react": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-key": 1,
+    "react/jsx-pascal-case": 2,
+    "react/sort-comp": 2,
+    "react/no-deprecated": 2,
+    "react/no-unknown-property": 2,
+    "react/jsx-boolean-value": 1,
+    "import/no-unresolved": 2,
+    "import/imports-first": 2,
+    "import/no-duplicates": 2,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/export": 2,
+    "import/no-named-as-default": 2,
+    "no-global-assign": ["error", {"exceptions": ["__webpack_public_path__"]}]
+  },
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:flowtype/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
   }
 }

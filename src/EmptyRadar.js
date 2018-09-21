@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
-import RadarAxis from './RadarAxis';
-import RadarRings from './RadarRings';
-import type {RadarVariable} from './types';
-import {radiusScales, forEachArray} from './utils';
+import React from "react";
+import RadarAxis from "./RadarAxis";
+import RadarRings from "./RadarRings";
+import type { RadarVariable } from "./types";
+import { radiusScales, forEachArray } from "./utils";
 
 type Props = {
   width: number,
@@ -11,18 +11,18 @@ type Props = {
   padding: number,
   variables: Array<RadarVariable>,
   domainMax: number,
-  style?: {},
+  style?: {}
 };
 
 const defaultRadarStyle = {
   numRings: 4,
-  axisColor: '#cdcdcd',
-  ringColor: '#cdcdcd',
+  axisColor: "#cdcdcd",
+  ringColor: "#cdcdcd"
 };
 
 export default function EmptyRadar(props: Props) {
-  const {width, height, padding, variables, domainMax, style} = props;
-  const {axisColor, ringColor, numRings} = {...defaultRadarStyle, ...style};
+  const { width, height, padding, variables, domainMax, style } = props;
+  const { axisColor, ringColor, numRings } = { ...defaultRadarStyle, ...style };
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
 
@@ -31,9 +31,9 @@ export default function EmptyRadar(props: Props) {
 
   const scales = radiusScales(variables, domainMax, radius);
 
-  const angleSliceRadians = Math.PI * 2 / variables.length;
+  const angleSliceRadians = (Math.PI * 2) / variables.length;
   const offsetAngles = {};
-  forEachArray(variables, ({key}, i) => {
+  forEachArray(variables, ({ key }, i) => {
     offsetAngles[key] = angleSliceRadians * i;
   });
 
@@ -47,12 +47,10 @@ export default function EmptyRadar(props: Props) {
         <rect
           width={diameter}
           height={diameter}
-          fill={'transparent'}
-          transform={
-            `translate(${(innerWidth - diameter) / 2}, ${(innerHeight -
-              diameter) /
-              2})`
-          }
+          fill={"transparent"}
+          transform={`translate(${(innerWidth - diameter) / 2}, ${(innerHeight -
+            diameter) /
+            2})`}
         />
         <g transform={`translate(${innerWidth / 2}, ${innerHeight / 2})`}>
           <RadarRings
@@ -61,7 +59,7 @@ export default function EmptyRadar(props: Props) {
             color={ringColor}
             format={tickFormat}
           />
-          {variables.map(({key, label}) => {
+          {variables.map(({ key, label }) => {
             return (
               <RadarAxis
                 key={key}

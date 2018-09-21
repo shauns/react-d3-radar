@@ -1,17 +1,17 @@
 // @flow
-import _ from 'lodash';
-import {scaleLinear} from 'd3-scale';
-import type {TickScale, RadarPoint, RadarData, RadarVariable} from './types';
+import _ from "lodash";
+import { scaleLinear } from "d3-scale";
+import type { TickScale, RadarPoint, RadarData, RadarVariable } from "./types";
 
 export function flatMapDeepArray<T, R>(
   collection: Array<T>,
-  fn: (d: T) => Array<R>,
+  fn: (d: T) => Array<R>
 ): Array<R> {
   return _.flatMapDeep(collection, fn);
 }
 export function forEachArray<T>(
   collection: Array<T>,
-  fn: (item: T, idx: number) => void,
+  fn: (item: T, idx: number) => void
 ): void {
   _.forEach(collection, fn);
 }
@@ -19,11 +19,13 @@ export function forEachArray<T>(
 export function radiusScales(
   variables: Array<RadarVariable>,
   domainMax: number,
-  radius: number,
-): {[variableKey: string]: TickScale} {
+  radius: number
+): { [variableKey: string]: TickScale } {
   const res = {};
-  _.forEach(variables, ({key}) => {
-    const scale = scaleLinear().domain([0, domainMax]).range([0, radius]);
+  _.forEach(variables, ({ key }) => {
+    const scale = scaleLinear()
+      .domain([0, domainMax])
+      .range([0, radius]);
     res[key] = scale;
   });
   return res;
@@ -31,12 +33,12 @@ export function radiusScales(
 
 export function radarPoints(
   data: RadarData,
-  scales: {[variableKey: string]: TickScale},
-  offsetAngles: {[variableKey: string]: number},
-): Array<{setKey: string, points: Array<RadarPoint>}> {
+  scales: { [variableKey: string]: TickScale },
+  offsetAngles: { [variableKey: string]: number }
+): Array<{ setKey: string, points: Array<RadarPoint> }> {
   const allVariableKeys = data.variables.map(variable => variable.key);
 
-  return data.sets.map(({key, values}) => {
+  return data.sets.map(({ key, values }) => {
     const points = [];
     _.forEach(values, (value, variableKey) => {
       const scale = scales[variableKey];
@@ -54,7 +56,7 @@ export function radarPoints(
         value,
         setKey: key,
         variableKey,
-        key: `${key}--${variableKey}`,
+        key: `${key}--${variableKey}`
       };
       points.push(point);
     });
@@ -64,6 +66,6 @@ export function radarPoints(
       return _.indexOf(allVariableKeys, pointVariableKey);
     });
 
-    return {setKey: key, points: sortedPoints};
+    return { setKey: key, points: sortedPoints };
   });
 }

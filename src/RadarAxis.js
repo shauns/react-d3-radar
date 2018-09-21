@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import type {TickScale} from './types';
+import React from "react";
+import type { TickScale } from "./types";
 
 type RadarAxisProps = {
   scale: TickScale,
@@ -8,28 +8,28 @@ type RadarAxisProps = {
   domainMax: number,
   label: string,
   color: string,
-  style?: {},
+  style?: {}
 };
 
 const defaultRadarAxisStyle = {
   axisOverreach: 1.1,
   labelOverreach: 1.2,
   fontSize: 10,
-  fontFamily: 'sans-serif',
-  textFill: 'black',
-  axisWidth: 2,
+  fontFamily: "sans-serif",
+  textFill: "black",
+  axisWidth: 2
 };
 
 export default function RadarAxis(props: RadarAxisProps) {
-  const {scale, offsetAngle, domainMax, label, color, style} = props;
+  const { scale, offsetAngle, domainMax, label, color, style } = props;
   const {
     axisOverreach,
     labelOverreach,
     fontSize,
     fontFamily,
     textFill,
-    axisWidth,
-  } = {...defaultRadarAxisStyle, style};
+    axisWidth
+  } = { ...defaultRadarAxisStyle, style };
   const xFactor = Math.cos(offsetAngle - Math.PI / 2);
   const yFactor = Math.sin(offsetAngle - Math.PI / 2);
   return (
@@ -48,8 +48,8 @@ export default function RadarAxis(props: RadarAxisProps) {
         fontSize={fontSize}
         fontFamily={fontFamily}
         fill={textFill}
-        textAnchor={'middle'}
-        dy={'0.35em'}
+        textAnchor={"middle"}
+        dy={"0.35em"}
       >
         {label}
       </text>

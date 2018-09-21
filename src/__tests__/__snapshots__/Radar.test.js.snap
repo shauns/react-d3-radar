@@ -1,42 +1,53 @@
-exports[`test Renders component 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders component 1`] = `
 <svg
   height={500}
-  width={500}>
+  width={500}
+>
   <g
-    transform="translate(70, 70)">
+    transform="translate(70, 70)"
+  >
     <rect
       fill="transparent"
       height={360}
       transform="translate(0, 0)"
-      width={360} />
+      width={360}
+    />
     <g
-      transform="translate(180, 180)">
+      transform="translate(180, 180)"
+    >
       <g>
         <circle
           fill="#cdcdcd"
           fillOpacity={0.1}
           r={180}
-          stroke="#cdcdcd" />
+          stroke="#cdcdcd"
+        />
         <circle
           fill="#cdcdcd"
           fillOpacity={0.1}
           r={144}
-          stroke="#cdcdcd" />
+          stroke="#cdcdcd"
+        />
         <circle
           fill="#cdcdcd"
           fillOpacity={0.1}
           r={108}
-          stroke="#cdcdcd" />
+          stroke="#cdcdcd"
+        />
         <circle
           fill="#cdcdcd"
           fillOpacity={0.1}
           r={72}
-          stroke="#cdcdcd" />
+          stroke="#cdcdcd"
+        />
         <circle
           fill="#cdcdcd"
           fillOpacity={0.1}
           r={36}
-          stroke="#cdcdcd" />
+          stroke="#cdcdcd"
+        />
         <text
           dx="0.4em"
           dy="0.4em"
@@ -45,7 +56,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="left"
           x={0}
-          y={-180}>
+          y={-180}
+        >
           10
         </text>
         <text
@@ -56,7 +68,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="left"
           x={0}
-          y={-144}>
+          y={-144}
+        >
           8
         </text>
         <text
@@ -67,7 +80,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="left"
           x={0}
-          y={-108}>
+          y={-108}
+        >
           6
         </text>
         <text
@@ -78,7 +92,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="left"
           x={0}
-          y={-72}>
+          y={-72}
+        >
           4
         </text>
         <text
@@ -89,7 +104,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="left"
           x={0}
-          y={-36}>
+          y={-36}
+        >
           2
         </text>
       </g>
@@ -100,7 +116,8 @@ exports[`test Renders component 1`] = `
           x1={0}
           x2={1.2124003311558799e-14}
           y1={0}
-          y2={-198.00000000000003} />
+          y2={-198.00000000000003}
+        />
         <text
           dy="0.35em"
           fill="black"
@@ -108,7 +125,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="middle"
           x={1.3226185430791415e-14}
-          y={-216}>
+          y={-216}
+        >
           Resilience
         </text>
       </g>
@@ -119,7 +137,8 @@ exports[`test Renders component 1`] = `
           x1={0}
           x2={171.47302994931886}
           y1={0}
-          y2={-99.00000000000001} />
+          y2={-99.00000000000001}
+        />
         <text
           dy="0.35em"
           fill="black"
@@ -127,7 +146,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="middle"
           x={187.06148721743872}
-          y={-108}>
+          y={-108}
+        >
           Strength
         </text>
       </g>
@@ -138,7 +158,8 @@ exports[`test Renders component 1`] = `
           x1={0}
           x2={171.47302994931889}
           y1={0}
-          y2={98.99999999999999} />
+          y2={98.99999999999999}
+        />
         <text
           dy="0.35em"
           fill="black"
@@ -146,7 +167,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="middle"
           x={187.06148721743875}
-          y={107.99999999999996}>
+          y={107.99999999999996}
+        >
           Adaptability
         </text>
       </g>
@@ -157,7 +179,8 @@ exports[`test Renders component 1`] = `
           x1={0}
           x2={1.2124003311558799e-14}
           y1={0}
-          y2={198.00000000000003} />
+          y2={198.00000000000003}
+        />
         <text
           dy="0.35em"
           fill="black"
@@ -165,7 +188,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="middle"
           x={1.3226185430791415e-14}
-          y={216}>
+          y={216}
+        >
           Creativity
         </text>
       </g>
@@ -176,7 +200,8 @@ exports[`test Renders component 1`] = `
           x1={0}
           x2={-171.47302994931886}
           y1={0}
-          y2={99.00000000000009} />
+          y2={99.00000000000009}
+        />
         <text
           dy="0.35em"
           fill="black"
@@ -184,7 +209,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="middle"
           x={-187.06148721743872}
-          y={108.00000000000007}>
+          y={108.00000000000007}
+        >
           Open to Change
         </text>
       </g>
@@ -195,7 +221,8 @@ exports[`test Renders component 1`] = `
           x1={0}
           x2={-171.47302994931894}
           y1={0}
-          y2={-98.99999999999989} />
+          y2={-98.99999999999989}
+        />
         <text
           dy="0.35em"
           fill="black"
@@ -203,7 +230,8 @@ exports[`test Renders component 1`] = `
           fontSize={10}
           textAnchor="middle"
           x={-187.06148721743884}
-          y={-107.99999999999987}>
+          y={-107.99999999999987}
+        >
           Confidence
         </text>
       </g>
@@ -213,49 +241,56 @@ exports[`test Renders component 1`] = `
           fill="#1f77b4"
           fillOpacity={0.2}
           stroke="#1f77b4"
-          strokeOpacity={0.7} />
+          strokeOpacity={0.7}
+        />
         <circle
           cx={4.408728476930472e-15}
           cy={-72}
           fill="#1f77b4"
           opacity={0.7}
           r={3}
-          stroke="#1f77b4" />
+          stroke="#1f77b4"
+        />
         <circle
           cx={93.53074360871936}
           cy={-54}
           fill="#1f77b4"
           opacity={0.7}
           r={3}
-          stroke="#1f77b4" />
+          stroke="#1f77b4"
+        />
         <circle
           cx={109.11920087683926}
           cy={62.99999999999997}
           fill="#1f77b4"
           opacity={0.7}
           r={3}
-          stroke="#1f77b4" />
+          stroke="#1f77b4"
+        />
         <circle
           cx={2.204364238465236e-15}
           cy={36}
           fill="#1f77b4"
           opacity={0.7}
           r={3}
-          stroke="#1f77b4" />
+          stroke="#1f77b4"
+        />
         <circle
           cx={-124.70765814495914}
           cy={72.00000000000004}
           fill="#1f77b4"
           opacity={0.7}
           r={3}
-          stroke="#1f77b4" />
+          stroke="#1f77b4"
+        />
         <circle
           cx={-15.588457268119903}
           cy={-8.99999999999999}
           fill="#1f77b4"
           opacity={0.7}
           r={3}
-          stroke="#1f77b4" />
+          stroke="#1f77b4"
+        />
       </g>
       <g>
         <path
@@ -263,49 +298,56 @@ exports[`test Renders component 1`] = `
           fill="#ff7f0e"
           fillOpacity={0.2}
           stroke="#ff7f0e"
-          strokeOpacity={0.7} />
+          strokeOpacity={0.7}
+        />
         <circle
           cx={1.1021821192326179e-14}
           cy={-180}
           fill="#ff7f0e"
           opacity={0.7}
           r={3}
-          stroke="#ff7f0e" />
+          stroke="#ff7f0e"
+        />
         <circle
           cx={124.70765814495915}
           cy={-72}
           fill="#ff7f0e"
           opacity={0.7}
           r={3}
-          stroke="#ff7f0e" />
+          stroke="#ff7f0e"
+        />
         <circle
           cx={93.53074360871938}
           cy={53.99999999999998}
           fill="#ff7f0e"
           opacity={0.7}
           r={3}
-          stroke="#ff7f0e" />
+          stroke="#ff7f0e"
+        />
         <circle
           cx={4.408728476930472e-15}
           cy={72}
           fill="#ff7f0e"
           opacity={0.7}
           r={3}
-          stroke="#ff7f0e" />
+          stroke="#ff7f0e"
+        />
         <circle
           cx={-31.176914536239785}
           cy={18.00000000000001}
           fill="#ff7f0e"
           opacity={0.7}
           r={3}
-          stroke="#ff7f0e" />
+          stroke="#ff7f0e"
+        />
         <circle
           cx={-0}
           cy={-0}
           fill="#ff7f0e"
           opacity={0.7}
           r={3}
-          stroke="#ff7f0e" />
+          stroke="#ff7f0e"
+        />
       </g>
     </g>
   </g>

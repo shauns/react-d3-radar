@@ -1,16 +1,16 @@
 // @flow
-import React from 'react';
-import {schemeCategory10} from 'd3-scale';
-import {voronoi} from 'd3-voronoi';
-import _ from 'lodash';
+import React from "react";
+import { schemeCategory10 } from "d3-scale-chromatic";
+import { voronoi } from "d3-voronoi";
+import _ from "lodash";
 import {
   flatMapDeepArray,
   forEachArray,
   radarPoints,
-  radiusScales,
-} from './utils';
-import type {RadarPoint, RadarData} from './types';
-import RadarWrapper from './RadarWrapper';
+  radiusScales
+} from "./utils";
+import type { RadarPoint, RadarData } from "./types";
+import RadarWrapper from "./RadarWrapper";
 
 type Props = {
   data: RadarData,
@@ -20,25 +20,25 @@ type Props = {
   domainMax: number,
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
-  highlighted: ?RadarPoint,
+  highlighted: ?RadarPoint
 };
 
 function convertData(props) {
-  const {data, width, height, padding, domainMax} = props;
+  const { data, width, height, padding, domainMax } = props;
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
 
   const radius = Math.min(innerWidth / 2, innerHeight / 2);
   const scales = radiusScales(data.variables, domainMax, radius);
 
-  const angleSliceRadians = Math.PI * 2 / data.variables.length;
+  const angleSliceRadians = (Math.PI * 2) / data.variables.length;
   const offsetAngles = {};
-  forEachArray(data.variables, ({key}, i) => {
+  forEachArray(data.variables, ({ key }, i) => {
     offsetAngles[key] = angleSliceRadians * i;
   });
 
   const allPoints = radarPoints(data, scales, offsetAngles);
-  const flatPointList = flatMapDeepArray(allPoints, ({points}) => {
+  const flatPointList = flatMapDeepArray(allPoints, ({ points }) => {
     return points;
   });
 
@@ -47,7 +47,7 @@ function convertData(props) {
     .y((d: RadarPoint) => d.y + radius)
     .size([radius * 2, radius * 2])(flatPointList);
 
-  return {allPoints, scales, offsetAngles, voronoiDiagram, radius};
+  return { allPoints, scales, offsetAngles, voronoiDiagram, radius };
 }
 
 export default function Radar(props: Props) {
@@ -59,24 +59,28 @@ export default function Radar(props: Props) {
     domainMax,
     style,
     onHover,
-    highlighted,
+    highlighted
   } = props;
-  const {allPoints, scales, offsetAngles, radius, voronoiDiagram} = convertData(
-    props,
-  );
+  const {
+    allPoints,
+    scales,
+    offsetAngles,
+    radius,
+    voronoiDiagram
+  } = convertData(props);
 
   const highlightedSetKey = highlighted ? highlighted.setKey : null;
 
   const backgroundScale = scales[data.variables[0].key];
 
   const colors = {};
-  forEachArray(allPoints, ({setKey}, idx) => {
+  forEachArray(allPoints, ({ setKey }, idx) => {
     colors[setKey] = schemeCategory10[idx];
   });
 
   const [highlightedPoints, regularPoints] = _.partition(
     allPoints,
-    ({setKey}) => setKey === highlightedSetKey,
+    ({ setKey }) => setKey === highlightedSetKey
   );
 
   return (
