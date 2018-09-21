@@ -31,7 +31,7 @@ function convertData(props) {
   const radius = Math.min(innerWidth / 2, innerHeight / 2);
   const scales = radiusScales(data.variables, domainMax, radius);
 
-  const angleSliceRadians = (Math.PI * 2) / data.variables.length;
+  const angleSliceRadians = Math.PI * 2 / data.variables.length;
   const offsetAngles = {};
   forEachArray(data.variables, ({ key }, i) => {
     offsetAngles[key] = angleSliceRadians * i;
@@ -45,7 +45,7 @@ function convertData(props) {
   const voronoiDiagram = voronoi()
     .x((d: RadarPoint) => d.x + radius)
     .y((d: RadarPoint) => d.y + radius)
-    .size([radius * 2, radius * 2])(flatPointList);
+    .size([ radius * 2, radius * 2 ])(flatPointList);
 
   return { allPoints, scales, offsetAngles, voronoiDiagram, radius };
 }
@@ -74,11 +74,15 @@ export default function Radar(props: Props) {
   const backgroundScale = scales[data.variables[0].key];
 
   const colors = {};
-  forEachArray(allPoints, ({ setKey }, idx) => {
-    colors[setKey] = schemeCategory10[idx];
+  forEachArray(allPoints, ({ setKey, color }, idx) => {
+    if (color) {
+      colors[setKey] = color;
+    } else {
+      colors[setKey] = schemeCategory10[idx];
+    }
   });
 
-  const [highlightedPoints, regularPoints] = _.partition(
+  const [ highlightedPoints, regularPoints ] = _.partition(
     allPoints,
     ({ setKey }) => setKey === highlightedSetKey
   );

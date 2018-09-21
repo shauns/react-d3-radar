@@ -10,7 +10,8 @@ export type RadarVariable = { key: string, label: string };
 type RadarDataSet = {
   key: string,
   label: string,
-  values: { [variableKey: string]: number }
+  values: { [variableKey: string]: number },
+  color?: string
 };
 
 export type RadarData = {

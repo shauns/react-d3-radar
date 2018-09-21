@@ -23,9 +23,7 @@ export function radiusScales(
 ): { [variableKey: string]: TickScale } {
   const res = {};
   _.forEach(variables, ({ key }) => {
-    const scale = scaleLinear()
-      .domain([0, domainMax])
-      .range([0, radius]);
+    const scale = scaleLinear().domain([ 0, domainMax ]).range([ 0, radius ]);
     res[key] = scale;
   });
   return res;
@@ -35,10 +33,10 @@ export function radarPoints(
   data: RadarData,
   scales: { [variableKey: string]: TickScale },
   offsetAngles: { [variableKey: string]: number }
-): Array<{ setKey: string, points: Array<RadarPoint> }> {
+): Array<{ setKey: string, points: Array<RadarPoint>, color?: string }> {
   const allVariableKeys = data.variables.map(variable => variable.key);
 
-  return data.sets.map(({ key, values }) => {
+  return data.sets.map(({ key, values, ...rest }) => {
     const points = [];
     _.forEach(values, (value, variableKey) => {
       const scale = scales[variableKey];
@@ -66,6 +64,6 @@ export function radarPoints(
       return _.indexOf(allVariableKeys, pointVariableKey);
     });
 
-    return { setKey: key, points: sortedPoints };
+    return { setKey: key, points: sortedPoints, ...rest };
   });
 }
