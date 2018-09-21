@@ -7,6 +7,7 @@ node_js:
   - 10
 script: npm run lint && npm run flow_check && npm run test:travis
 deploy:
+  skip_cleanup: true
   provider: npm
   email: shaun.stanworth@googlemail.com
   api_key:
