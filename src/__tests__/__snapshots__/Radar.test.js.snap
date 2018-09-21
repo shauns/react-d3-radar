@@ -3,6 +3,14 @@
 exports[`Renders component 1`] = `
 <svg
   height={500}
+  style={
+    Object {
+      "height": "100%",
+      "overflow": "visible",
+      "width": "100%",
+    }
+  }
+  viewBox="0 0 500 500"
   width={500}
 >
   <g

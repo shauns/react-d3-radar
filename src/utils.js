@@ -23,7 +23,9 @@ export function radiusScales(
 ): { [variableKey: string]: TickScale } {
   const res = {};
   _.forEach(variables, ({ key }) => {
-    const scale = scaleLinear().domain([ 0, domainMax ]).range([ 0, radius ]);
+    const scale = scaleLinear()
+      .domain([0, domainMax])
+      .range([0, radius]);
     res[key] = scale;
   });
   return res;

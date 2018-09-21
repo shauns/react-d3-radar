@@ -105,7 +105,12 @@ export default class RadarWrapper extends Component<Props> {
     const tickFormat = backgroundScale.tickFormat(numRings);
 
     return (
-      <svg width={width} height={height}>
+      <svg
+        width={width}
+        height={height}
+        style={{ width: "100%", height: "100%", overflow: "visible" }}
+        viewBox={`0 0 ${width} ${height}`}
+      >
         <g
           transform={`translate(${padding}, ${padding})`}
           ref={c => {
