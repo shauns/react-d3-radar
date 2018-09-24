@@ -21,7 +21,8 @@ type Props = {
   radius: number,
   highlightedPoint: ?{ setKey: string, points: Array<RadarPoint> },
   regularPoints: Array<{ setKey: string, points: Array<RadarPoint> }>,
-  colors: { [setKey: string]: string }
+  colors: { [setKey: string]: string },
+  onAxisLabelClick?: ({ variableKey: string, label: string }) => void
 };
 
 const defaultRadarStyle = {
@@ -90,7 +91,8 @@ export default class RadarWrapper extends Component<Props> {
       highlightedPoint,
       regularPoints,
       backgroundScale,
-      colors
+      colors,
+      onAxisLabelClick
     } = this.props;
     const diameter = radius * 2;
     const { axisColor, ringColor, numRings } = {
@@ -135,11 +137,13 @@ export default class RadarWrapper extends Component<Props> {
               return (
                 <RadarAxis
                   key={key}
+                  variableKey={key}
                   scale={scales[key]}
                   offsetAngle={offsetAngles[key]}
                   label={label}
                   domainMax={domainMax}
                   color={axisColor}
+                  onAxisLabelClick={onAxisLabelClick}
                 />
               );
             })}

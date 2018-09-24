@@ -62,6 +62,7 @@ export default function EmptyRadar(props: Props) {
           {variables.map(({ key, label }) => {
             return (
               <RadarAxis
+                variableKey={key}
                 key={key}
                 scale={scales[key]}
                 offsetAngle={offsetAngles[key]}

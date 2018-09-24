@@ -20,7 +20,8 @@ type Props = {
   domainMax: number,
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
-  highlighted: ?RadarPoint
+  highlighted: ?RadarPoint,
+  onAxisLabelClick?: ({ variableKey: string, label: string }) => void
 };
 
 function convertData(props) {
@@ -63,7 +64,8 @@ export default function Radar(props: Props) {
     domainMax,
     style,
     onHover,
-    highlighted
+    highlighted,
+    onAxisLabelClick
   } = props;
 
   const converted = convertData(props);
@@ -112,6 +114,7 @@ export default function Radar(props: Props) {
       }
       regularPoints={regularPoints}
       colors={colors}
+      onAxisLabelClick={onAxisLabelClick}
     />
   );
 }

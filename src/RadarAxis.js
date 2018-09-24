@@ -3,12 +3,14 @@ import React from "react";
 import type { TickScale } from "./types";
 
 type RadarAxisProps = {
+  variableKey: string,
   scale: TickScale,
   offsetAngle: number,
   domainMax: number,
   label: string,
   color: string,
-  style?: {}
+  style?: {},
+  onAxisLabelClick?: ({ variableKey: string, label: string }) => void
 };
 
 const defaultRadarAxisStyle = {
@@ -21,7 +23,16 @@ const defaultRadarAxisStyle = {
 };
 
 export default function RadarAxis(props: RadarAxisProps) {
-  const { scale, offsetAngle, domainMax, label, color, style } = props;
+  const {
+    scale,
+    offsetAngle,
+    domainMax,
+    label,
+    color,
+    style,
+    onAxisLabelClick,
+    variableKey
+  } = props;
   const {
     axisOverreach,
     labelOverreach,
@@ -32,6 +43,11 @@ export default function RadarAxis(props: RadarAxisProps) {
   } = { ...defaultRadarAxisStyle, style };
   const xFactor = Math.cos(offsetAngle - Math.PI / 2);
   const yFactor = Math.sin(offsetAngle - Math.PI / 2);
+
+  const onClick = onAxisLabelClick
+    ? () => onAxisLabelClick({ variableKey, label })
+    : null;
+
   return (
     <g>
       <line
@@ -50,6 +66,7 @@ export default function RadarAxis(props: RadarAxisProps) {
         fill={textFill}
         textAnchor={"middle"}
         dy={"0.35em"}
+        onClick={onClick}
       >
         {label}
       </text>
