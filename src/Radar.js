@@ -21,7 +21,8 @@ type Props = {
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
-  onAxisLabelClick?: ({ variableKey: string, label: string }) => void
+  onAxisLabelClick?: ({ variableKey: string, label: string }) => void,
+  axisLabelTextStyle?: {}
 };
 
 function convertData(props) {
@@ -65,7 +66,8 @@ export default function Radar(props: Props) {
     style,
     onHover,
     highlighted,
-    onAxisLabelClick
+    onAxisLabelClick,
+    axisLabelTextStyle
   } = props;
 
   const converted = convertData(props);
@@ -115,6 +117,7 @@ export default function Radar(props: Props) {
       regularPoints={regularPoints}
       colors={colors}
       onAxisLabelClick={onAxisLabelClick}
+      axisLabelTextStyle={axisLabelTextStyle}
     />
   );
 }

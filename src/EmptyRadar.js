@@ -69,6 +69,7 @@ export default function EmptyRadar(props: Props) {
                 label={label}
                 domainMax={domainMax}
                 color={axisColor}
+                textStyle={{}}
               />
             );
           })}

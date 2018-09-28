@@ -10,7 +10,8 @@ type RadarAxisProps = {
   label: string,
   color: string,
   style?: {},
-  onAxisLabelClick?: ({ variableKey: string, label: string }) => void
+  onAxisLabelClick?: ({ variableKey: string, label: string }) => void,
+  textStyle: ?{}
 };
 
 const defaultRadarAxisStyle = {
@@ -31,7 +32,8 @@ export default function RadarAxis(props: RadarAxisProps) {
     color,
     style,
     onAxisLabelClick,
-    variableKey
+    variableKey,
+    textStyle
   } = props;
   const {
     axisOverreach,
@@ -67,6 +69,8 @@ export default function RadarAxis(props: RadarAxisProps) {
         textAnchor={"middle"}
         dy={"0.35em"}
         onClick={onClick}
+        onMouseOver={onClick}
+        style={textStyle}
       >
         {label}
       </text>
