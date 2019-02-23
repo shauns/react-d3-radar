@@ -11,6 +11,7 @@ type RadarAxisProps = {
   color: string,
   style?: {},
   onAxisLabelClick?: ({ variableKey: string, label: string }) => void,
+  onAxisLabelMouseover?: ({ variableKey: string, label: string }) => void,
   textStyle: ?{}
 };
 
@@ -32,6 +33,7 @@ export default function RadarAxis(props: RadarAxisProps) {
     color,
     style,
     onAxisLabelClick,
+    onAxisLabelMouseover,
     variableKey,
     textStyle
   } = props;
@@ -48,6 +50,10 @@ export default function RadarAxis(props: RadarAxisProps) {
 
   const onClick = onAxisLabelClick
     ? () => onAxisLabelClick({ variableKey, label })
+    : null;
+
+  const onMouseover = onAxisLabelMouseover
+    ? () => onAxisLabelMouseover({ variableKey, label })
     : null;
 
   return (
@@ -69,7 +75,7 @@ export default function RadarAxis(props: RadarAxisProps) {
         textAnchor={"middle"}
         dy={"0.35em"}
         onClick={onClick}
-        onMouseOver={onClick}
+        onMouseOver={onMouseover}
         style={textStyle}
       >
         {label}
