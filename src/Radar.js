@@ -49,8 +49,8 @@ function convertData(props) {
   });
 
   const voronoiDiagram = voronoi()
-    .x((d: RadarPoint) => d.x + radius)
-    .y((d: RadarPoint) => d.y + radius)
+    .x((d: RadarPoint) => d.x + radius + (Math.random() - 0.5))
+    .y((d: RadarPoint) => d.y + radius + (Math.random() - 0.5))
     .size([radius * 2, radius * 2])(flatPointList);
 
   return { allPoints, scales, offsetAngles, voronoiDiagram, radius };
