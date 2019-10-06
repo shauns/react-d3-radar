@@ -32,18 +32,18 @@ const defaultCircleStyle = {
 const morphTransition = ({ from, to }) => tween({
   from: 0,
   to: 1,
-  duration: 1000,
+  duration: 1000, // todo: make this prop
   ease: easing.easeInOut
 }).pipe(interpolate(from, to));
 
 const Shape = posed.path(
   {
-    "current": {
-      "d": ({ currentPath }) => currentPath,
+    "a": {
+      "d": ({ aPath }) => aPath,
       transition: morphTransition,
     },
-    "previous": {
-      "d": ({ previousPath }) => previousPath,
+    "b": {
+      "d": ({ bPath }) => bPath,
       transition: morphTransition,
     },
   }
@@ -54,30 +54,39 @@ class RadarCircle extends React.Component<RadarCircleProps> {
     super(props);
 
     this.state = {
-        previousPath: this.lineFunction(this.props.previousPoints),
-        currentPath: this.lineFunction(this.props.currentPoints),
-        keys: ['current', 'previous'],
+        aPath: this.lineFunction(this.props.previousPoints),
+        bPath: this.lineFunction(this.props.currentPoints),
+        keys: ['a', 'b'],
         index: 0,
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps != this.props) {
-      this.setState({
-        previousPath: this.lineFunction(this.props.previousPoints),
-        currentPath: this.lineFunction(this.props.currentPoints),
-      })
+    if (prevProps.currentPoints != this.props.currentPoints) {
+      this.alternatePaths();
     }
   }
 
-  componentDidMount() {
-    console.log('mounted radar circle');
-    setTimeout(() => {
-      console.log('should have animated the fucking thing');
+  alternatePaths = () => {
+    const { index, keys } = this.state;
+
+    if (keys[index] === 'a') {
+      // load the new svg into b and switcht to b
       this.setState({
-        index: 1,
+        bPath:  this.lineFunction(this.props.currentPoints),
+        index: index === 0 ? 1 : 0,
       })
-    }, 5000);
+    }
+
+    if (keys[index] === 'b') {
+      // load the new svg into b and switcht to b
+      this.setState({
+        aPath:  this.lineFunction(this.props.currentPoints),
+        index: index === 0 ? 1 : 0,
+      })
+    }
+
+    return;
   }
 
   lineFunction = radialLine()
@@ -95,8 +104,8 @@ class RadarCircle extends React.Component<RadarCircleProps> {
     const {
       index,
       keys,
-      previousPath,
-      currentPath,
+      aPath,
+      bPath,
     } = this.state;
 
     const {
@@ -110,8 +119,8 @@ class RadarCircle extends React.Component<RadarCircleProps> {
       <g>
         <Shape
           pose={keys[index]}
-          previousPath={previousPath}
-          currentPath={currentPath}
+          aPath={aPath}
+          bPath={bPath}
           fill={color}
           fillOpacity={isSelected ? selectedFillOpacity : inactiveFillOpacity}
           stroke={color}

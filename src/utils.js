@@ -37,7 +37,6 @@ export function radarPoints(
   const allVariableKeys = data.variables.map(variable => variable.key);
 
   return data.sets.map(({key, currentValues, previousValues}) => {
-    console.log('currentValues', currentValues)
     const sortedCurrentPoints = convertValuesToPoints(currentValues, scales, offsetAngles, key, allVariableKeys);
     const sortedPreviousPoints = convertValuesToPoints(previousValues, scales, offsetAngles, key, allVariableKeys);
 
@@ -52,7 +51,7 @@ function convertValuesToPoints(
     key: string,
     allVariableKeys: Array<string>,
   ): Array<RadarPoint> {
-    console.log(allVariableKeys);
+
   const points = [];
   _.forEach(values, (value, variableKey) => {
     const scale = scales[variableKey];
