@@ -140,11 +140,12 @@ export default class RadarWrapper extends Component {
                 />
               );
             })}
-            {regularPoints.map(({setKey, points}) => {
+            {regularPoints.map(({setKey, currentPoints, previousPoints}) => {
               return (
                 <RadarCircle
                   key={setKey}
-                  points={points}
+                  currentPoints={currentPoints}
+                  previousPoints={previousPoints}
                   scales={scales}
                   offsetAngles={offsetAngles}
                   color={colors[setKey]}

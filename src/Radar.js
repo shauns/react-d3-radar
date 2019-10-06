@@ -38,8 +38,9 @@ function convertData(props) {
   });
 
   const allPoints = radarPoints(data, scales, offsetAngles);
-  const flatPointList = flatMapDeepArray(allPoints, ({points}) => {
-    return points;
+  console.log('allPoints', allPoints);
+  const flatPointList = flatMapDeepArray(allPoints, ({currentPoints, previousPoints}) => {
+    return [...currentPoints, ...previousPoints];
   });
 
   const voronoiDiagram = voronoi()
@@ -78,7 +79,7 @@ export default function Radar(props: Props) {
     allPoints,
     ({setKey}) => setKey === highlightedSetKey,
   );
-
+  console.log('someotherjazzy shit', voronoiDiagram);
   return (
     <RadarWrapper
       variables={data.variables}

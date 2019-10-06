@@ -5,7 +5,8 @@ import {radialLine, curveCardinalClosed} from 'd3-shape';
 import type {TickScale, RadarPoint} from './types';
 
 type RadarCircleProps = {
-  points: Array<RadarPoint>,
+  currentPoints: Array<RadarPoint>,
+  previousPoints: Array<RadarPoint>,
   scales: {[variableKey: string]: TickScale},
   offsetAngles: {[variableKey: string]: number},
   isSelected: boolean,
@@ -27,7 +28,8 @@ const defaultCircleStyle = {
 
 export default function RadarCircle(props: RadarCircleProps) {
   const {
-    points,
+    currentPoints,
+    previousPoints,
     scales,
     offsetAngles,
     isSelected,
@@ -51,11 +53,13 @@ export default function RadarCircle(props: RadarCircleProps) {
     .angle((point: RadarPoint) => _.round(offsetAngles[point.variableKey], 6))
     .curve(curveCardinalClosed);
 
-  const pathData = lineFunction(points);
+  console.log('currentPoints', currentPoints);
+  const previousPathData = lineFunction(previousPoints);
+  const currentPathData = lineFunction(currentPoints);
   return (
     <g>
       <path
-        d={pathData}
+        d={previousPathData}
         fill={color}
         fillOpacity={isSelected ? selectedFillOpacity : inactiveFillOpacity}
         stroke={color}
@@ -63,7 +67,16 @@ export default function RadarCircle(props: RadarCircleProps) {
           isSelected ? selectedStrokeOpacity : inactiveStrokeOpacity
         }
       />
-      {points.map(point => {
+      <path
+        d={currentPathData}
+        fill={color}
+        fillOpacity={isSelected ? selectedFillOpacity : inactiveFillOpacity}
+        stroke={color}
+        strokeOpacity={
+          isSelected ? selectedStrokeOpacity : inactiveStrokeOpacity
+        }
+      />
+      {/* {points.map(point => {
         return (
           <circle
             key={point.key}
@@ -79,7 +92,7 @@ export default function RadarCircle(props: RadarCircleProps) {
             opacity={isSelected ? selectedPointOpacity : inactivePointOpacity}
           />
         );
-      })}
+      })} */}
     </g>
   );
 }

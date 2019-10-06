@@ -10,13 +10,14 @@ export type RadarVariable = {key: string, label: string};
 type RadarDataSet = {
   key: string,
   label: string,
-  values: {[variableKey: string]: number},
+  currentValues: {[variableKey: string]: number},
+  previousValues: {[variableKey: string]: number},
 };
 
 export type RadarData = {
   variables: Array<RadarVariable>,
   sets: Array<RadarDataSet>,
-};
+}; 
 
 export type RadarPoint = {
   x: number,
