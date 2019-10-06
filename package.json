@@ -14,13 +14,16 @@
     "prettier": "prettier --write --bracket-spacing=false --single-quote --trailing-comma src/*.js src/**/*.js"
   },
   "peerDependencies": {
-    "react": "^15.0.0"
+    "react": "^16.8.5"
   },
   "dependencies": {
     "d3-scale": "^1.0.4",
     "d3-shape": "^1.0.4",
     "d3-voronoi": "^1.1.1",
-    "lodash": "^4.17.4"
+    "flubber": "^0.4.2",
+    "lodash": "^4.17.4",
+    "popmotion": "^8.7.0",
+    "react-pose": "^4.0.8"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -39,7 +42,7 @@
     "flow-copy-source": "^1.1.0",
     "jest": "^18.1.0",
     "prettier": "^0.11.0",
-    "react": "^15.4.2",
+    "react": "^16.8.5",
     "react-test-renderer": "^15.4.2"
   },
   "keywords": [
