@@ -38,6 +38,7 @@ function getHovered(
   radius: number,
   voronoiDiagram: any,
 ) {
+  console.log('will TEST LOG HOVER FN');
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
   const diameter = radius * 2;
