@@ -30,7 +30,16 @@ const defaultRadarStyle = {
   ringColor: '#cdcdcd',
 };
 
+function getOffsets(e, chart) {
+  const offsetDict = {};
+  const rect = chart.getBoundingClientRect();
+  offsetDict['x'] = e.clientX - rect.left;
+  offsetDict['y'] = e.clientY - rect.top;
+  return offsetDict;
+}
+
 function getHovered(
+  chart: any,
   event: MouseEvent,
   height: number,
   width: number,
@@ -38,12 +47,15 @@ function getHovered(
   radius: number,
   voronoiDiagram: any,
 ) {
-  console.log('will TEST LOG HOVER FN');
   const innerHeight = height - padding * 2;
   const innerWidth = width - padding * 2;
   const diameter = radius * 2;
 
-  let {offsetX: clientX, offsetY: clientY} = event;
+  const offsets = getOffsets(event, chart);
+
+  let clientX = offsets['x'];
+  let clientY = offsets['y'];
+
   clientX -= padding;
   clientY -= padding;
   clientX -= (innerWidth - diameter) / 2;
@@ -72,7 +84,7 @@ export default class RadarWrapper extends Component {
         }
         const {padding, height, width, radius, voronoiDiagram} = this.props;
         onHover(
-          getHovered(event, height, width, padding, radius, voronoiDiagram),
+          getHovered(this, event, height, width, padding, radius, voronoiDiagram),
         );
       });
     }
