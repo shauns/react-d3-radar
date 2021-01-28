@@ -137,6 +137,7 @@ export default class RadarWrapper extends Component {
                   label={label}
                   domainMax={domainMax}
                   color={axisColor}
+                  style={style}
                 />
               );
             })}
